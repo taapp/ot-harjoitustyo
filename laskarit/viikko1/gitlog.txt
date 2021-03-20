@@ -1,0 +1,112 @@
+commit aae9addcf3771bf9a54360e410d55d648506d90b
+Author: taapp <julius.nieminen@helsinki.fi>
+Date:   Sat Mar 20 13:52:26 2021 +0200
+
+    poistettu file1, muutettu file2 -> file22
+
+ tiedostoja/{file2 => file22} | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit c988c350d48b652df76241488f1e2d8b76a4b42c
+Author: taapp <julius.nieminen@helsinki.fi>
+Date:   Sat Mar 20 13:51:42 2021 +0200
+
+    poistettu file1, muutettu file2 -> file22
+
+ tiedostoja/file1 | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 61f9facffb79a11af17fd852cf2f3332889801be
+Author: taapp <julius.nieminen@helsinki.fi>
+Date:   Sat Mar 20 13:48:41 2021 +0200
+
+    uusi kansio ja uusia tiedostoja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit d8d6181cf9d628df6232c55aba4cbf6427c1b2d4
+Author: taapp <julius.nieminen@helsinki.fi>
+Date:   Sat Mar 20 13:42:52 2021 +0200
+
+    muutoksia git add -p testiä varten
+
+ eka.txt    | 2 ++
+ kolmas.txt | 2 ++
+ 2 files changed, 4 insertions(+)
+
+commit 1fcf6299eb77d1149480affb9c7c983294d1d133
+Author: taapp <julius.nieminen@helsinki.fi>
+Date:   Sat Mar 20 13:41:12 2021 +0200
+
+    muutettu nimi tiedosto.txt -> eka.txt
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 30a411829151eb174c10ac41fdbd65a51c117642
+Author: taapp <julius.nieminen@helsinki.fi>
+Date:   Sat Mar 20 13:40:08 2021 +0200
+
+    poistettu toinen.txt
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 85f2843e7bc74441a5526c1f37d063bd55730fc5
+Author: taapp <julius.nieminen@helsinki.fi>
+Date:   Sat Mar 20 13:37:53 2021 +0200
+
+    poistettu ja lisätty tekstiä tiedosto.txt:hen
+
+ tiedosto.txt | 12 +++---------
+ 1 file changed, 3 insertions(+), 9 deletions(-)
+
+commit 16b9638b1defacd34c157156267cddc55c5cff3a
+Author: taapp <julius.nieminen@helsinki.fi>
+Date:   Sat Mar 20 13:36:48 2021 +0200
+
+    lisätty tekstiä tiedosto.txt:hen
+
+ tiedosto.txt | 632 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 632 insertions(+)
+
+commit 3e9e99db4a0a0751cdecf43a4ac3f7904e6526bc
+Author: taapp <julius.nieminen@helsinki.fi>
+Date:   Sat Mar 20 13:31:24 2021 +0200
+
+    muutettu toinen.txt ja kolmas.txt
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 968723de5b9ca7f30f8c8ed3cb06d1b5d12b00ac
+Author: taapp <julius.nieminen@helsinki.fi>
+Date:   Sat Mar 20 13:30:16 2021 +0200
+
+    lisätty kolmas
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit ab76f79c7e0684a65c02dda4ac8ee668222ac766
+Author: taapp <julius.nieminen@helsinki.fi>
+Date:   Sat Mar 20 13:26:35 2021 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 912d54e7919874a820c015afacdb9f23c432c28e
+Author: taapp <julius.nieminen@helsinki.fi>
+Date:   Sat Mar 20 13:24:59 2021 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
