@@ -6,3 +6,6 @@
 [komentorivi.txt](https://github.com/taapp/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
 paikallinen muutos
+
+toinen paikallinen muutos
+
