@@ -20,7 +20,7 @@ Sovelluksella on käyttäjärooli normaali käyttäjä, joka voi vastata kysymys
 
 - käyttäjä voi vastata kysymyssarjaan
 
-- käyttäjä nähdä viimeisimmän vastaamansa kysymyssarjan loppuraportin
+- käyttäjä voi nähdä viimeisimmän vastaamansa kysymyssarjan loppuraportin
 
 - käyttäjä voi kirjautua ulos järjestelmästä
 
@@ -30,5 +30,11 @@ Sovelluksella on käyttäjärooli normaali käyttäjä, joka voi vastata kysymys
 
 ## Jatkokehitysideoita
 
-- uusi kysymys ja kysymyssarjatyyppi, jossa väitteiden totuusarvoa ei vielä tiedetä (eli väitteet voivat koskea esim. tulevia tapahtumia), ja pääkäyttäjä täydentää myöhemmin totuusarvon
+Jos aika riittää, seuraavia toiminnallisuuksia voidaan implementoida
+
+- uusi kysymystyyppi (ennuste) ja kysymyssarjatyyppi (ennustesarja tai ennustekilpailu), jossa väitteiden totuusarvoa ei vielä tiedetä (eli väitteet voivat koskea esim. tulevia tapahtumia), ja pääkäyttäjä täydentää myöhemmin totuusarvon
+
+- käyttäjä voi tarkastella koko vastaushistoriaansa
+
+- pääkäyttäjä voi tarkastella tilastoja siitä, miten yksittäisiin kysymyksiin on vastattu
 
