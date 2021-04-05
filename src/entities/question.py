@@ -1,5 +1,6 @@
 class Question:
-    def __init__(self, truth, statement, comment):
+    def __init__(self, id, truth, statement, comment):
+        self.id = id
         self.truth = truth
         self.statement = statement
         self.comment = comment

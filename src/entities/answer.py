@@ -1,5 +1,6 @@
 class Answer:
-    def __init__(self, question, probability):
+    def __init__(self, id, question, probability):
+        self.id = id
         self.question = question
         self.probability = probability
 
