@@ -11,6 +11,6 @@ class Series:
         self.questions = questions
 
     def print_all_questions(self):
-        print("truth,statement:")
+        print("truth, statement:")
         for q in self.questions:
             print(q)

@@ -9,13 +9,13 @@ class SeriesRepository:
         self.file_path = file_path
 
     def get_default_series(self):
-        series = Series('default')
+        series = Series('1','default')
         questions = []
         with open(self.file_path) as f:
             reader = csv.reader(f, delimiter=",")
             for i,row in enumerate(reader):
                 if i != 0:
-                    questions.append(Question(int(row[0]), row[1], row[2]))
+                    questions.append(Question(int(row[0]), int(row[1]), row[2], row[3]))
         series.set_all_questions(questions)
         return series
 
