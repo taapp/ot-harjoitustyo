@@ -14,3 +14,7 @@ class Series:
         print("truth, statement:")
         for q in self.questions:
             print(q)
+
+
+    def __len__(self):
+        return len(self.questions)
