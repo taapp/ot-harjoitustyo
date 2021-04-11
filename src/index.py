@@ -1,8 +1,17 @@
-from repositories.series_repository import series_repository
+from tkinter import Tk
+from ui.ui import UI
+
 
 def main():
-    series = series_repository.get_default_series()
-    series.print_all_questions()
-    
+
+    window = Tk()
+    window.title("TkInter example")
+
+    ui = UI(window)
+    ui.start()
+
+    window.mainloop()
+
+
 if __name__=='__main__':
     main()
