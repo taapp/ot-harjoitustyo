@@ -19,4 +19,4 @@ class SeriesRepository:
         series.set_all_questions(questions)
         return series
 
-series_repository = SeriesRepository(Path(r"/home/juliusni/opiskelu/Ohjelmistotekniikka/ot-harjoitustyo/src/data") / "default_series.csv")
+series_repository = SeriesRepository(Path(__file__).parent.parent / 'data' / "default_series.csv")
