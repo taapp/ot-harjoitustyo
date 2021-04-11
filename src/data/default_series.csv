@@ -1,0 +1,4 @@
+truth, statement, comment
+1,1,"Paris is the capital of France.","https://en.wikipedia.org/wiki/France"
+2,1,"The area of Finland is over 300000 square kilometers.","https://en.wikipedia.org/wiki/Finland"
+3,0,"In 2019 the nominal GDP per capita of Saudi Arabia was over 25000 US dollars","https://en.wikipedia.org/wiki/List_of_countries_by_GDP_%28nominal%29_per_capita"
