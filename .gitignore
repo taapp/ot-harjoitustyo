@@ -8,3 +8,7 @@ laskarit/viikko2/unicafe/src/tests/__pycache__/
 /src/repositories/__pycache__
 /src/services/__pycache__
 /src/ui/__pycache__
+/src/tests/__pycache__
+/src/tests/services/__pycache__
+htmlcov
+.coverage
