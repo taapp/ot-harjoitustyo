@@ -44,7 +44,7 @@ class ReportView:
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
         label = ttk.Label(master=self._frame, text=f"Report for the question series:")
-        label_score = ttk.Label(master=self._frame, text=f"The total Brier score is {self._score_total} (smaller is better)")
+        label_score = ttk.Label(master=self._frame, text=f"The total Brier score is {self._score_total:.3f} (smaller is better, 0 is minimum)")
         label.grid()
         label_score.grid()
         
@@ -72,7 +72,7 @@ class QuestionView:
         self._entry = ttk.Entry(master=self._frame)
         button = ttk.Button(
             master=self._frame,
-            text="Say hello",
+            text="Give answer",
             command=self._handle_button_click
         )
 
