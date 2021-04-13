@@ -1,6 +1,6 @@
 # Ohjelmistotekniikka, harjoitustyö
 
-Harjoitustyön nimi on Probability quiz. Käyttäjä saa sarjan väitteitä, joihin vastataan antamalla todennäköisyysarvo eli reaaliluku väliltä 0-1. Silloin kun väite on tosi, sitä paremmat pisteet saa, mitä lähempänä todennäköisyysarvo on yhtä, ja vastaavasti epätodelle väitteelle nollaa lähempänä olevalla todennäköisyysarvolla saa paremmat pisteet. Kun kaikkiin väitteisiin on vastattu, käyttäjä saa kokonaispistetuloksen. 
+Harjoitustyön nimi on Probability quiz. Käyttäjä saa sarjan väitteitä, joihin vastataan antamalla todennäköisyysarvo eli reaaliluku väliltä 0-1. Kun kaikkiin väitteisiin on vastattu, käyttäjä saa [Brier-pisteytyssäännön](https://en.wikipedia.org/wiki/Brier_score) mukaisen kokonaispistetuloksen. 
 
 ## Python-versiosta
 
