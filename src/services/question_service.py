@@ -33,7 +33,7 @@ class QuestionService:
 
 
     def get_total_score(self):
-        return sum([answer.score() for answer in self.cur_answers])
+        return sum([answer.score() for answer in self.cur_answers])/len(self.cur_answers)
 
 
 

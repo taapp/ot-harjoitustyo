@@ -11,5 +11,5 @@ class TestQuestionService(unittest.TestCase):
     
     def test_get_total_score(self):
         total_score = question_service.get_total_score()
-        self.assertEqual(total_score, 0.25)
+        self.assertEqual(total_score, 0.5**2/3)
 
