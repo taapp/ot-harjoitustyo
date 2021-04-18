@@ -1,7 +1,8 @@
 from pathlib import Path
+import csv
 from entities.question import Question
 from entities.series import Series
-import csv
+
 
 
 class SeriesRepository:
@@ -12,8 +13,8 @@ class SeriesRepository:
     def get_default_series(self):
         series = Series('1', 'default')
         questions = []
-        with open(self.file_path) as f:
-            reader = csv.reader(f, delimiter=",")
+        with open(self.file_path) as file:
+            reader = csv.reader(file, delimiter=",")
             for i, row in enumerate(reader):
                 if i != 0:
                     questions.append(

@@ -1,5 +1,4 @@
-from tkinter import Tk, ttk, constants
-from itertools import count
+from tkinter import ttk, constants
 from services.question_service import question_service
 
 
@@ -44,7 +43,7 @@ class ReportView:
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
         label = ttk.Label(master=self._frame,
-                          text=f"Report for the question series:")
+                          text="Report for the question series:")
         label_score = ttk.Label(
             master=self._frame, text=f"The total Brier score is {self._score_total:.3f} (smaller is better, 0 is minimum)")
         label.grid()
