@@ -1,6 +1,6 @@
 class Series:
-    def __init__(self, id, name):
-        self.id = id
+    def __init__(self, id_series, name):
+        self.id = id_series
         self.name = name
         self.questions = []
 
@@ -12,9 +12,8 @@ class Series:
 
     def print_all_questions(self):
         print("truth, statement:")
-        for q in self.questions:
-            print(q)
-
+        for question in self.questions:
+            print(question)
 
     def __len__(self):
         return len(self.questions)

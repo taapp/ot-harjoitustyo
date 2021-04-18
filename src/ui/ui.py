@@ -43,11 +43,12 @@ class ReportView:
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
-        label = ttk.Label(master=self._frame, text=f"Report for the question series:")
-        label_score = ttk.Label(master=self._frame, text=f"The total Brier score is {self._score_total:.3f} (smaller is better, 0 is minimum)")
+        label = ttk.Label(master=self._frame,
+                          text=f"Report for the question series:")
+        label_score = ttk.Label(
+            master=self._frame, text=f"The total Brier score is {self._score_total:.3f} (smaller is better, 0 is minimum)")
         label.grid()
         label_score.grid()
-        
 
 
 class QuestionView:
@@ -65,7 +66,7 @@ class QuestionView:
 
     def destroy(self):
         self._frame.destroy()
-    
+
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
         label = ttk.Label(master=self._frame, text=f"{self._question_text}")
@@ -87,10 +88,9 @@ class QuestionView:
         try:
             entry_val = float(entry_val)
         except ValueError:
-            return 
+            return
         question_service.give_new_answer(entry_val)
         self._button_handler()
-        
 
 
 class UI:
@@ -111,21 +111,21 @@ class UI:
         self._current_view = None
         question = question_service.get_next_question()
         if question is not None:
-            self._current_view = QuestionView(self._root, question.statement, self._handle_answer_button)
+            self._current_view = QuestionView(
+                self._root, question.statement, self._handle_answer_button)
             self._current_view.pack()
         else:
             self._hide_current_view()
             self._show_view_report()
-    
+
     def _show_view_report(self):
-        self._current_view = ReportView(self._root, question_service.get_total_score())
+        self._current_view = ReportView(
+            self._root, question_service.get_total_score())
         self._current_view.pack()
-    
 
     def _handle_answer_button(self):
         self._hide_current_view()
         if question_service.is_series_finished():
-            self._show_view_report()    
+            self._show_view_report()
         else:
             self._show_view_question()
-
