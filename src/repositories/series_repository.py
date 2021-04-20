@@ -4,7 +4,6 @@ from entities.question import Question
 from entities.series import Series
 
 
-
 class SeriesRepository:
 
     def __init__(self, file_path):

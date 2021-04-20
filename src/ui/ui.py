@@ -112,16 +112,18 @@ class LoginView:
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
-        label_welcome = ttk.Label(master=self._frame, text="Welcome. Create a new user and login.")
+        label_welcome = ttk.Label(
+            master=self._frame, text="Welcome. Create a new user and login.")
         label_username = ttk.Label(master=self._frame, text="Username: ")
         label_password = ttk.Label(master=self._frame, text="Password: ")
         #radio_button = ttk.Radiobutton(master=self._frame, text = 'Admin')
-        
+
         self._entry_username = ttk.Entry(master=self._frame)
         self._entry_password = ttk.Entry(master=self._frame)
         self._check_admin = IntVar()
-        check_button = ttk.Checkbutton(master=self._frame, text='Admin', variable=self._check_admin, onvalue=1, offvalue=0)
-        
+        check_button = ttk.Checkbutton(
+            master=self._frame, text='Admin', variable=self._check_admin, onvalue=1, offvalue=0)
+
         button = ttk.Button(
             master=self._frame,
             text="Create user and login",
@@ -144,7 +146,8 @@ class LoginView:
         is_admin = self._check_admin.get()
         #print(entry_username, entry_password, is_admin)
 
-        question_service.save_user(entry_username, entry_password, bool(is_admin))
+        question_service.save_user(
+            entry_username, entry_password, bool(is_admin))
         self._button_handler()
 
 
@@ -160,7 +163,7 @@ class UI:
         self._current_view = None
 
     def start(self):
-        #self._show_view_question()
+        # self._show_view_question()
         self._show_view_login()
 
     def _show_view_login(self):

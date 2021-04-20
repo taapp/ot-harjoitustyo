@@ -12,4 +12,5 @@ class UserRepository:
         cur.execute(sql, [user.id, user.name, user.password, int(user.admin)])
         self._connection.commit()
 
+
 user_repository = UserRepository(get_database_connection())
