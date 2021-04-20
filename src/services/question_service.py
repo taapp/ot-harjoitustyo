@@ -9,6 +9,7 @@ class QuestionService:
         self.cur_series = None
         self.i_cur_question = None
         self.cur_answers = None
+        self.cur_user = None
 
     def load_default_series(self):
         self.cur_series = series_repository.get_default_series()
@@ -45,6 +46,10 @@ class QuestionService:
         uuid_user = self.create_uuid()
         user = User(uuid_user, username, password, is_admin)
         return user
+
+    def save_user(self, username, password, is_admin):
+        user_new = self.create_user(username, password, is_admin)
+        user_repository.insert_user(user_new)
 
 question_service = QuestionService()
 question_service.load_default_series()

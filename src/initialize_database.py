@@ -16,7 +16,7 @@ def create_tables(connection):
 
     cursor.execute('''
         create table users (
-            id INTEGER PRIMARY KEY,
+            id TEXT PRIMARY KEY,
             name TEXT NOT NULL UNIQUE,
             password TEXT NOT NULL UNIQUE,
             is_admin INTEGER NOT NULL

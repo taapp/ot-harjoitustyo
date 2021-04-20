@@ -1,4 +1,4 @@
-from tkinter import ttk, constants
+from tkinter import ttk, constants, IntVar
 from services.question_service import question_service
 
 
@@ -92,6 +92,62 @@ class QuestionView:
         self._button_handler()
 
 
+class LoginView:
+    def __init__(self, root, button_handler):
+        self._root = root
+        #self._question_text = question_text
+        self._frame = None
+        self._entry_username = None
+        self._entry_password = None
+        self._check_admin = None
+        self._button_handler = button_handler
+
+        self._initialize()
+
+    def pack(self):
+        self._frame.pack(fill=constants.X)
+
+    def destroy(self):
+        self._frame.destroy()
+
+    def _initialize(self):
+        self._frame = ttk.Frame(master=self._root)
+        label_welcome = ttk.Label(master=self._frame, text="Welcome. Create a new user and login.")
+        label_username = ttk.Label(master=self._frame, text="Username: ")
+        label_password = ttk.Label(master=self._frame, text="Password: ")
+        #radio_button = ttk.Radiobutton(master=self._frame, text = 'Admin')
+        
+        self._entry_username = ttk.Entry(master=self._frame)
+        self._entry_password = ttk.Entry(master=self._frame)
+        self._check_admin = IntVar()
+        check_button = ttk.Checkbutton(master=self._frame, text='Admin', variable=self._check_admin, onvalue=1, offvalue=0)
+        
+        button = ttk.Button(
+            master=self._frame,
+            text="Create user and login",
+            command=self._handle_button_click
+        )
+
+        #label.grid(row=0, column=0)
+        #button.grid(row=1, column=0)
+        label_welcome.grid()
+        label_username.grid(row=1, column=0)
+        self._entry_username.grid(row=1, column=1)
+        label_password.grid(row=2, column=0)
+        self._entry_password.grid(row=2, column=1)
+        check_button.grid()
+        button.grid()
+
+    def _handle_button_click(self):
+        entry_username = self._entry_username.get()
+        entry_password = self._entry_password.get()
+        is_admin = self._check_admin.get()
+        #print(entry_username, entry_password, is_admin)
+
+        question_service.save_user(entry_username, entry_password, bool(is_admin))
+        self._button_handler()
+
+
 class UI:
     def __init__(self, root):
         self._root = root
@@ -104,7 +160,12 @@ class UI:
         self._current_view = None
 
     def start(self):
-        self._show_view_question()
+        #self._show_view_question()
+        self._show_view_login()
+
+    def _show_view_login(self):
+        self._current_view = LoginView(self._root, self._handle_login_button)
+        self._current_view.pack()
 
     def _show_view_question(self):
         self._current_view = None
@@ -128,3 +189,7 @@ class UI:
             self._show_view_report()
         else:
             self._show_view_question()
+
+    def _handle_login_button(self):
+        self._hide_current_view()
+        self._show_view_question()
