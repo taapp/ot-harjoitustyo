@@ -10,6 +10,8 @@ Sovelluksen on suunniteltu toimivan Python-versiolla 3.6 ja sitä korkeammilla v
 
 [Vaatimusmäärittely](https://github.com/taapp/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
+[Arkkitehtuurikuvaus](https://github.com/taapp/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+
 [Työaikakirjanpito](https://github.com/taapp/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
 
 ## Asennus
