@@ -7,10 +7,21 @@ class UserRepository:
         self._connection = connection
 
     def insert_user(self, user):
-        cur = self._connection.cursor()
+        cursor = self._connection.cursor()
         sql = """INSERT INTO users(id, name, password, is_admin) VALUES (?,?,?,?)"""
-        cur.execute(sql, [user.id, user.name, user.password, int(user.admin)])
+        cursor.execute(sql, [user.id, user.name, user.password, int(user.admin)])
         self._connection.commit()
+
+    def delete_all(self):
+        cursor = self._connection.cursor()
+        cursor.execute("delete from users")
+        self._connection.commit()
+
+    def count_users(self):
+        cursor = self._connection.cursor()
+        cursor.execute("SELECT COUNT(*) FROM users")
+        cnt = cursor.fetchone()
+        return cnt
 
 
 user_repository = UserRepository(get_database_connection())
