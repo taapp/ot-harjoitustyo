@@ -12,16 +12,21 @@ Sovelluksella on käyttäjärooli normaali käyttäjä, joka voi vastata kysymys
 
 ### Ennen kirjautumista
 
-- käyttäjä voi luoda käyttäjätunnuksen sovellukseen
-  - käyttäjätunnukset ovat uniikkeja
+- käyttäjä voi luoda käyttäjätunnuksen sovellukseen, käyttäjätunnukset ovat uniikkeja
+  - käyttäjä voi luoda käyttäjätunnuksen, joka tallentuu tietokantaan [x]
+  - käyttäjätunnukset ovat tietokannassa uniikkeja (users-taulu) [x]
 
 - käyttäjä voi kirjautua sovellukseen
+  - uusi käyttäjä voi vastata kysymyssarjaan [x]
+  - aiemmin kirjautunut käyttäjä voi vastata kysymyssarjaan [ ]
 
 ### Kirjautumisen jälkeen
 
 - käyttäjä voi vastata kysymyssarjaan
+  - käyttäjä voi vastata default-kysymyssarjaan [x]
 
 - käyttäjä voi nähdä viimeisimmän vastaamansa kysymyssarjan loppuraportin
+  - käyttäjä näkee default-kysymyssarjalle Brier-pisteet [x]
 
 - käyttäjä voi kirjautua ulos järjestelmästä
 
