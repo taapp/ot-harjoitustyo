@@ -16,3 +16,7 @@ class TestQuestionService(unittest.TestCase):
     def test_get_total_score(self):
         total_score = question_service.get_total_score()
         self.assertEqual(total_score, 0.5**2/3)
+
+    def test_create_user(self):
+        user = question_service.create_user('Kalle', 'passu', False)
+        self.assertEqual(user.__str__(), "User, name: Kalle, type: False")

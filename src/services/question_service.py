@@ -1,6 +1,8 @@
 from repositories.series_repository import series_repository
+from repositories.user_repository import user_repository
 from entities.answer import Answer
-
+from entities.user import User
+import uuid
 
 class QuestionService:
     def __init__(self):
@@ -34,7 +36,15 @@ class QuestionService:
 
     def get_total_score(self):
         return sum([answer.score() for answer in self.cur_answers])/len(self.cur_answers)
+    
+    def create_uuid(self):
+        uuid_new = str(uuid.uuid4())
+        return uuid_new
 
+    def create_user(self, username, password, is_admin):
+        uuid_user = self.create_uuid()
+        user = User(uuid_user, username, password, is_admin)
+        return user
 
 question_service = QuestionService()
 question_service.load_default_series()
