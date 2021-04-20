@@ -9,7 +9,8 @@ class UserRepository:
     def insert_user(self, user):
         cursor = self._connection.cursor()
         sql = """INSERT INTO users(id, name, password, is_admin) VALUES (?,?,?,?)"""
-        cursor.execute(sql, [user.id, user.name, user.password, int(user.admin)])
+        cursor.execute(
+            sql, [user.id, user.name, user.password, int(user.admin)])
         self._connection.commit()
 
     def delete_all(self):
