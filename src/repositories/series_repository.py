@@ -1,5 +1,6 @@
 from pathlib import Path
 import csv
+import uuid
 from entities.question import Question
 from entities.series import Series
 
@@ -17,10 +18,14 @@ class SeriesRepository:
             for i, row in enumerate(reader):
                 if i != 0:
                     questions.append(
-                        Question(int(row[0]), int(row[1]), row[2], row[3]))
+                        #Question(int(row[0]), int(row[1]), row[2], row[3]))
+                        Question(self.create_uuid(), int(row[1]), row[2], row[3]))
         series.set_all_questions(questions)
         return series
 
+    def create_uuid(self):
+        uuid_new = str(uuid.uuid4())
+        return uuid_new
 
 series_repository = SeriesRepository(
     Path(__file__).parent.parent / 'data' / "default_series.csv")

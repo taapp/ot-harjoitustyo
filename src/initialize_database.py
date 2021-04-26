@@ -10,10 +10,8 @@ def drop_tables(connection):
 
     connection.commit()
 
-
-def create_tables(connection):
+def create_users_table(connection):
     cursor = connection.cursor()
-
     cursor.execute('''
         create table users (
             id TEXT PRIMARY KEY,
@@ -22,8 +20,26 @@ def create_tables(connection):
             is_admin INTEGER NOT NULL
         );
     ''')
-
     connection.commit()
+
+
+def create_questions_table(connection):
+    cursor = connection.cursor()
+    cursor.execute('''
+        create table questions (
+            id TEXT PRIMARY KEY,
+            truth TEXT NOT NULL,
+            statement TEXT NOT NULL,
+            comment TEXT
+        );
+    ''')
+    connection.commit()
+
+
+
+def create_tables(connection):
+    create_users_table(connection)
+    create_questions_table(connection)
 
 
 def initialize_database():
