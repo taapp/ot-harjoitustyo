@@ -7,7 +7,15 @@ def drop_tables(connection):
     cursor.execute('''
         drop table if exists users;
     ''')
-
+    cursor.execute('''
+        drop table if exists questions;
+    ''')
+    cursor.execute('''
+        drop table if exists series;
+    ''')
+    cursor.execute('''
+        drop table if exists series_questions;
+    ''')
     connection.commit()
 
 def create_users_table(connection):
@@ -36,10 +44,36 @@ def create_questions_table(connection):
     connection.commit()
 
 
+def create_series_table(connection):
+    cursor = connection.cursor()
+    cursor.execute('''
+        create table series (
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL
+        );
+    ''')
+    connection.commit()
+
+
+
+def create_series_questions_table(connection):
+    cursor = connection.cursor()
+    cursor.execute('''
+        create table series_questions (
+            id TEXT PRIMARY KEY,
+            id_series TEXT NOT NULL,
+            id_question TEXT NOT NULL
+        );
+    ''')
+    connection.commit()
+
+
 
 def create_tables(connection):
     create_users_table(connection)
     create_questions_table(connection)
+    create_series_table(connection)
+    create_series_questions_table(connection)
 
 
 def initialize_database():
