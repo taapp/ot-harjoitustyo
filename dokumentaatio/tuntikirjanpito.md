@@ -11,4 +11,5 @@
 | 18.4. | 1    | pylintin ja autopep8 toiminnallisuuksien lisääminen ja niiden ehdottamien korjausten tekeminen  |
 | 19.4. | 1    | Arkkitehtuurikuvien tekeminen |
 | 20.4. | 3    | Tietokannan tuominen mukaan osaksi sovellusta, käyttöliittymää kehitetty siten, että käyttäjän luoma user tallentuu tietokantaan |
-| yht    | 19    |  |
+| 26.4. | 1    | Uusien tietokantataulujen luonti |
+| yht    | 20    |  |
