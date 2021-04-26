@@ -18,6 +18,7 @@ def drop_tables(connection):
     ''')
     connection.commit()
 
+
 def create_users_table(connection):
     cursor = connection.cursor()
     cursor.execute('''
@@ -36,7 +37,7 @@ def create_questions_table(connection):
     cursor.execute('''
         create table questions (
             id TEXT PRIMARY KEY,
-            truth TEXT NOT NULL,
+            truth INTEGER NOT NULL,
             statement TEXT NOT NULL,
             comment TEXT
         );
@@ -55,7 +56,6 @@ def create_series_table(connection):
     connection.commit()
 
 
-
 def create_series_questions_table(connection):
     cursor = connection.cursor()
     cursor.execute('''
@@ -66,7 +66,6 @@ def create_series_questions_table(connection):
         );
     ''')
     connection.commit()
-
 
 
 def create_tables(connection):

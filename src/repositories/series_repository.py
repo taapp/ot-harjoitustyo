@@ -3,22 +3,24 @@ import csv
 import uuid
 from entities.question import Question
 from entities.series import Series
+from database_connection import get_database_connection
 
 
 class SeriesRepository:
 
-    def __init__(self, file_path):
+    def __init__(self, file_path, connection):
         self.file_path = file_path
+        self._connection = connection
 
     def get_default_series(self):
-        series = Series('1', 'default')
+        series = Series(self.create_uuid(), 'default')
         questions = []
         with open(self.file_path) as file:
             reader = csv.reader(file, delimiter=",")
             for i, row in enumerate(reader):
                 if i != 0:
                     questions.append(
-                        #Question(int(row[0]), int(row[1]), row[2], row[3]))
+                        # Question(int(row[0]), int(row[1]), row[2], row[3]))
                         Question(self.create_uuid(), int(row[1]), row[2], row[3]))
         series.set_all_questions(questions)
         return series
@@ -27,5 +29,62 @@ class SeriesRepository:
         uuid_new = str(uuid.uuid4())
         return uuid_new
 
+    def insert_question(self, question):
+        cursor = self._connection.cursor()
+        sql = """INSERT INTO questions(id, truth, statement, comment) VALUES (?,?,?,?)"""
+        cursor.execute(
+            sql, [question.id, int(question.truth), question.statement, question.comment])
+        self._connection.commit()
+
+    def delete_all_questions(self):
+        cursor = self._connection.cursor()
+        cursor.execute("delete from questions")
+        self._connection.commit()
+
+    def count_table(self, table_name):
+        cursor = self._connection.cursor()
+        cursor.execute(f"SELECT COUNT(*) FROM {table_name}")
+        cnt = cursor.fetchone()
+        return cnt
+
+    def count_questions(self):
+        return self.count_table('questions')
+
+    def count_series(self):
+        return self.count_table('series')
+
+    def count_series_questions(self):
+        return self.count_table('series_questions')
+
+    def insert_series(self, series):
+        cursor = self._connection.cursor()
+        sql = """INSERT INTO series(id, name) VALUES (?,?)"""
+        cursor.execute(
+            sql, [series.id, series.name])
+        self._connection.commit()
+
+    def delete_all_series(self):
+        cursor = self._connection.cursor()
+        cursor.execute("delete from series")
+        self._connection.commit()
+
+    def insert_series_questions(self, id_series, id_question):
+        cursor = self._connection.cursor()
+        sql = """INSERT INTO series_questions(id, id_series, id_question) VALUES (?,?,?)"""
+        cursor.execute(
+            sql, [self.create_uuid(), id_series, id_question])
+        self._connection.commit()
+
+    def delete_all_series_questions(self):
+        cursor = self._connection.cursor()
+        cursor.execute("delete from series_questions")
+        self._connection.commit()
+
+    def delete_all(self):
+        self.delete_all_questions()
+        self.delete_all_series()
+        self.delete_all_series_questions()
+
+
 series_repository = SeriesRepository(
-    Path(__file__).parent.parent / 'data' / "default_series.csv")
+    Path(__file__).parent.parent / 'data' / "default_series.csv", get_database_connection())
