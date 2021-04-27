@@ -26,7 +26,8 @@ class UserRepository:
 
     def load_user_by_username_and_password(self, username, password):
         cursor = self._connection.cursor()
-        cursor.execute("SELECT id,name,password,is_admin FROM users WHERE name=? AND password=?", [username, password])
+        cursor.execute("SELECT id,name,password,is_admin FROM users WHERE name=? AND password=?", [
+                       username, password])
         res = cursor.fetchone()
         if res is not None:
             user = User(res[0], res[1], res[2], res[3])

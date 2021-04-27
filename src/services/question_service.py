@@ -59,7 +59,8 @@ class QuestionService:
         self.cur_user = user
 
     def load_and_set_user(self, username, password):
-        user = user_repository.load_user_by_username_and_password(username, password)
+        user = user_repository.load_user_by_username_and_password(
+            username, password)
         self.set_current_user(user)
 
 

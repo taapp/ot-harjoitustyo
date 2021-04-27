@@ -165,7 +165,6 @@ class LoginView:
         self._button_handler_login()
 
 
-
 class CreateUserView:
     def __init__(self, root, button_handler):
         self._root = root
@@ -241,11 +240,13 @@ class UI:
         self._show_view_login()
 
     def _show_view_login(self):
-        self._current_view = LoginView(self._root, self._handle_create_button, self._handle_login_button)
+        self._current_view = LoginView(
+            self._root, self._handle_create_button, self._handle_login_button)
         self._current_view.pack()
 
     def _show_view_create(self):
-        self._current_view = CreateUserView(self._root, self._handle_login_button)
+        self._current_view = CreateUserView(
+            self._root, self._handle_login_button)
         self._current_view.pack()
 
     def _show_view_question(self):
