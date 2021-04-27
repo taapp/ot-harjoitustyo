@@ -24,7 +24,7 @@ class UserRepository:
         cnt = cursor.fetchone()
         return cnt
 
-    def load_user_by_username_and_password(self, username, password):
+    def load_user(self, username, password):
         cursor = self._connection.cursor()
         cursor.execute("SELECT id,name,password,is_admin FROM users WHERE name=? AND password=?", [
                        username, password])

@@ -53,13 +53,13 @@ class QuestionService:
         user_repository.insert_user(user_new)
 
     def load_user(self, username, password):
-        return user_repository.load_user_by_username_and_password(username, password)
+        return user_repository.load_user(username, password)
 
     def set_current_user(self, user):
         self.cur_user = user
 
     def load_and_set_user(self, username, password):
-        user = user_repository.load_user_by_username_and_password(
+        user = self.load_user(
             username, password)
         self.set_current_user(user)
 
