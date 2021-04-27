@@ -25,7 +25,7 @@ def create_users_table(connection):
         create table users (
             id TEXT PRIMARY KEY,
             name TEXT NOT NULL UNIQUE,
-            password TEXT NOT NULL UNIQUE,
+            password TEXT NOT NULL,
             is_admin INTEGER NOT NULL
         );
     ''')

@@ -52,6 +52,16 @@ class QuestionService:
         user_new = self.create_user(username, password, is_admin)
         user_repository.insert_user(user_new)
 
+    def load_user(self, username, password):
+        return user_repository.load_user_by_username_and_password(username, password)
+
+    def set_current_user(self, user):
+        self.cur_user = user
+
+    def load_and_set_user(self, username, password):
+        user = user_repository.load_user_by_username_and_password(username, password)
+        self.set_current_user(user)
+
 
 question_service = QuestionService()
 question_service.load_default_series()
