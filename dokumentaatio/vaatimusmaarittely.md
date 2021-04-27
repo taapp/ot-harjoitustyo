@@ -18,7 +18,7 @@ Sovelluksella on käyttäjärooli normaali käyttäjä, joka voi vastata kysymys
 
 - käyttäjä voi kirjautua sovellukseen
   - uusi käyttäjä voi vastata kysymyssarjaan [tehty]
-  - aiemmin kirjautunut käyttäjä voi vastata kysymyssarjaan [ei tehty]
+  - aiemmin kirjautunut käyttäjä voi vastata kysymyssarjaan [tehty]
 
 ### Kirjautumisen jälkeen
 
@@ -31,8 +31,10 @@ Sovelluksella on käyttäjärooli normaali käyttäjä, joka voi vastata kysymys
 - käyttäjä voi kirjautua ulos järjestelmästä
 
 - pääkäyttäjä voi luoda uusia kysymyksiä
+  - kysymys-tietokantataulut luotu [tehty]
 
 - pääkäyttäjä voi luoda uusia kysymyssarjoja
+  - kysymyssarjoihin liittyvät tietokantataulut luotu [tehty]
 
 ## Jatkokehitysideoita
 
