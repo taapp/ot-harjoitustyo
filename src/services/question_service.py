@@ -32,9 +32,12 @@ class QuestionService:
     def is_series_finished(self):
         return self.i_cur_question >= len(self.cur_series)
 
-    def give_new_answer(self, val):
-        answer = Answer(1, self.get_current_question(), val)
+    def add_answer(self, answer):
         self.cur_answers.append(answer)
+
+    def give_new_answer(self, val):
+        answer = Answer(self.create_uuid(), self.get_current_question(), val)
+        self.add_answer(answer)
 
     def get_total_score(self):
         return sum([answer.score() for answer in self.cur_answers])/len(self.cur_answers)
