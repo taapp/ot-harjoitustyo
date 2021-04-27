@@ -14,6 +14,10 @@ Sovelluksen on suunniteltu toimivan Python-versiolla 3.6 ja sitä korkeammilla v
 
 [Työaikakirjanpito](https://github.com/taapp/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
 
+## Release
+
+[Viikon 5 release](https://github.com/taapp/ot-harjoitustyo/releases/tag/viikko5)
+
 ## Asennus
 
 1. Aja seuraava komento riippuvuuksien asentamiseksi
