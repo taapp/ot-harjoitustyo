@@ -12,4 +12,5 @@
 | 19.4. | 1    | Arkkitehtuurikuvien tekeminen |
 | 20.4. | 3    | Tietokannan tuominen mukaan osaksi sovellusta, käyttöliittymää kehitetty siten, että käyttäjän luoma user tallentuu tietokantaan |
 | 26.4. | 1    | Uusien tietokantataulujen luonti |
-| yht    | 20    |  |
+| 27.4. | 3    | Kirjautumiseen liittyvän käyttöliittymän ja logiikan tekeminen, sekvenssikaavioiden tekeminen |
+| yht    | 23    |  |
