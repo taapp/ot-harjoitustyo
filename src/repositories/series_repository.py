@@ -7,6 +7,7 @@ from database_connection import get_database_connection
 
 NAME_SERIES_DEFAULT = 'default'
 
+
 class SeriesRepository:
 
     def __init__(self, file_path, connection):
@@ -28,10 +29,8 @@ class SeriesRepository:
 
     def get_default_series(self):
         series = self.get_series_by_name(NAME_SERIES_DEFAULT)
-        self.get_questions_for_series(series)
+        series = self.get_questions_for_series(series)
         return series
-
-        
 
     def create_uuid(self):
         uuid_new = str(uuid.uuid4())
@@ -80,16 +79,19 @@ class SeriesRepository:
     def get_questions_for_series(self, series):
         series.empty_questions()
         cursor = self._connection.cursor()
-        cursor.execute(f"SELECT id_question FROM series_questions WHERE id_series=?", [series.id])
+        cursor.execute(
+            f"SELECT id_question FROM series_questions WHERE id_series=?", [series.id])
         ids_questions = cursor.fetchall()
         if ids_questions is None:
             return None
         for id_question in ids_questions:
-            cursor.execute(f"SELECT id, truth, statement, comment FROM questions WHERE id=?", id_question)
+            cursor.execute(
+                f"SELECT id, truth, statement, comment FROM questions WHERE id=?", id_question)
             question_data = cursor.fetchone()
-            question = Question(question_data[0], question_data[1], question_data[2], question_data[3])
+            question = Question(
+                question_data[0], question_data[1], question_data[2], question_data[3])
             series.add_question(question)
-
+        return series
 
     def delete_all_series(self):
         cursor = self._connection.cursor()
@@ -118,6 +120,7 @@ class SeriesRepository:
         for question in series.questions:
             self.insert_question(question)
             self.insert_series_questions(series.id, question.id)
+
 
 series_repository = SeriesRepository(
     Path(__file__).parent.parent / 'data' / "default_series.csv", get_database_connection())
