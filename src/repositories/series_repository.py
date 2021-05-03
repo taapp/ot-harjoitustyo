@@ -87,9 +87,9 @@ class SeriesRepository:
         for id_question in ids_questions:
             cursor.execute(
                 f"SELECT id, truth, statement, comment FROM questions WHERE id=?", id_question)
-            question_data = cursor.fetchone()
+            id_question, truth, statement, comment = cursor.fetchone()
             question = Question(
-                question_data[0], question_data[1], question_data[2], question_data[3])
+                id_question, truth, statement, comment)
             series.add_question(question)
         return series
 
