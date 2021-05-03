@@ -15,3 +15,4 @@ laskarit/viikko2/unicafe/src/tests/__pycache__/
 /src/data/database.db
 htmlcov
 .coverage
+.vscode
