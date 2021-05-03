@@ -17,3 +17,6 @@ class Series:
 
     def __len__(self):
         return len(self.questions)
+
+    def empty_questions(self):
+        self.questions = []

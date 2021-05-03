@@ -1,5 +1,5 @@
 from database_connection import get_database_connection
-
+from repositories.series_repository import series_repository
 
 def drop_tables(connection):
     cursor = connection.cursor()
@@ -75,12 +75,16 @@ def create_tables(connection):
     create_series_questions_table(connection)
 
 
+def insert_default_data():
+    series_default = series_repository.read_default_series_file()
+    series_repository.save_series_data(series_default)
+
 def initialize_database():
     connection = get_database_connection()
 
     drop_tables(connection)
     create_tables(connection)
-
+    insert_default_data()
 
 if __name__ == "__main__":
     initialize_database()
