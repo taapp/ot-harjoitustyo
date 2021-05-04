@@ -1,5 +1,11 @@
 class Question:
     """Luokka, joka vastaa kysymystä.
+
+    Attributes:
+        id_question: Merkkijono, joka on kysymyksen tunniste.
+        truth: Kokonaisluku 1 tai 0, joka vastaa kysymysväitteen totuusarvoa.
+        statement: Merkkijono, joka vastaa kysymyksen väitettä.
+        comment: Merkkijono, joka sisältää kysymykseen liittyvää mahdollista lisätietoa.        
     """
 
     def __init__(self, id_question, truth, statement, comment):
