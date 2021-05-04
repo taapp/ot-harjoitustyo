@@ -13,4 +13,6 @@
 | 20.4. | 3    | Tietokannan tuominen mukaan osaksi sovellusta, käyttöliittymää kehitetty siten, että käyttäjän luoma user tallentuu tietokantaan |
 | 26.4. | 1    | Uusien tietokantataulujen luonti |
 | 27.4. | 3    | Kirjautumiseen liittyvän käyttöliittymän ja logiikan tekeminen, sekvenssikaavioiden tekeminen |
-| yht    | 23    |  |
+| 3.5. | 1    | Pieniä parannuksia |
+| 4.5. | 4    | Syötteiden virheenkäsittely, docstringit, käyttäjän uloskirjautuminen, käyttöohje |
+| yht    | 28    |  |
