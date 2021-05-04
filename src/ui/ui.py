@@ -1,4 +1,4 @@
-from tkinter import ttk, constants, IntVar
+from tkinter import ttk, constants, IntVar, StringVar
 from services.question_service import question_service
 
 
@@ -75,11 +75,14 @@ class QuestionView:
             text="Give answer",
             command=self._handle_button_click
         )
-
+        self._error_text_var = StringVar()
+        self._error_text_var.set("")
+        label_error = ttk.Label(master=self._frame, textvariable=self._error_text_var)
         #label.grid(row=0, column=0)
         #button.grid(row=1, column=0)
         label.grid()
         self._entry.grid()
+        label_error.grid()
         button.grid()
 
     def _handle_button_click(self):
@@ -87,6 +90,12 @@ class QuestionView:
         try:
             entry_val = float(entry_val)
         except ValueError:
+            self._error_text_var.set("The probability has to be a real number")
+            self.pack()
+            return
+        if entry_val < 0 or entry_val > 1:
+            self._error_text_var.set("The probability has to be in [0,1].")
+            self.pack()
             return
         question_service.give_new_answer(entry_val)
         self._button_handler()
