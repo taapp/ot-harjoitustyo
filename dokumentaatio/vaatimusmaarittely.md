@@ -15,20 +15,24 @@ Sovelluksella on käyttäjärooli normaali käyttäjä, joka voi vastata kysymys
 - käyttäjä voi luoda käyttäjätunnuksen sovellukseen, käyttäjätunnukset ovat uniikkeja
   - käyttäjä voi luoda käyttäjätunnuksen, joka tallentuu tietokantaan [tehty]
   - käyttäjätunnukset ovat tietokannassa uniikkeja (users-taulu) [tehty]
+  - jos yritetään luoda käyttäjä, jonka nimi on sama kuin aiemmin tallennetun käyttäjän, luonti estetään ja käyttöliittymässä annetaan huomautus asiasta [tehty]
 
 - käyttäjä voi kirjautua sovellukseen
   - uusi käyttäjä voi vastata kysymyssarjaan [tehty]
   - aiemmin kirjautunut käyttäjä voi vastata kysymyssarjaan [tehty]
+  - käyttäjä jota ei ole luotu, ei voi vastata kysymyssarjaan [tehty]
 
 ### Kirjautumisen jälkeen
 
 - käyttäjä voi vastata kysymyssarjaan
   - käyttäjä voi vastata default-kysymyssarjaan [tehty]
+  - jos annettu vastaus ei ole reaaliluku väliltä [0,1], niin siitä tulee huomautus käyttöliittymässä [tehty]
 
 - käyttäjä voi nähdä viimeisimmän vastaamansa kysymyssarjan loppuraportin
   - käyttäjä näkee default-kysymyssarjalle Brier-pisteet [tehty]
 
 - käyttäjä voi kirjautua ulos järjestelmästä
+  - käyttäjä voi kirjautua ulos vastattuaan default-kysymyssarjaan [tehty]
 
 - pääkäyttäjä voi luoda uusia kysymyksiä
   - kysymys-tietokantataulut luotu [tehty]
