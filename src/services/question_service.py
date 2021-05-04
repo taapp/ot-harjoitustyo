@@ -14,7 +14,7 @@ class QuestionService:
 
     def load_default_series(self):
         self.cur_series = series_repository.get_default_series()
-        #self.i_cur_question = 0
+        self.i_cur_question = None
         self.cur_answers = []
 
     def get_current_question(self):
@@ -74,4 +74,4 @@ class QuestionService:
 
 
 question_service = QuestionService()
-question_service.load_default_series()
+# question_service.load_default_series()

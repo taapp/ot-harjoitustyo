@@ -27,10 +27,11 @@ class StartSeriesView:
 
 
 class ReportView:
-    def __init__(self, root, score_total):
+    def __init__(self, root, score_total, logout_button_handler):
         self._root = root
         self._frame = None
         self._score_total = score_total
+        self._logout_button_handler = logout_button_handler
 
         self._initialize()
 
@@ -46,8 +47,17 @@ class ReportView:
                           text="Report for the question series:")
         label_score = ttk.Label(
             master=self._frame, text=f"The total Brier score is {self._score_total:.3f} (smaller is better, 0 is minimum)")
+        button_logout = ttk.Button(
+            master=self._frame,
+            text="Logout",
+            command=self._handle_button_click_logout
+        )
         label.grid()
         label_score.grid()
+        button_logout.grid()
+
+    def _handle_button_click_logout(self):
+        self._logout_button_handler()
 
 
 class QuestionView:
@@ -269,17 +279,20 @@ class UI:
         self._show_view_login()
 
     def _show_view_login(self):
+        self._hide_current_view()
         self._current_view = LoginView(
             self._root, self._handle_create_button, self._handle_login_button)
         self._current_view.pack()
 
-    def _show_view_create(self):
-        self._current_view = CreateUserView(
-            self._root, self._handle_login_button)
-        self._current_view.pack()
+    # def _show_view_create(self):
+    #    self._current_view = CreateUserView(
+    #        self._root, self._handle_login_button)
+    #    self._current_view.pack()
 
-    def _show_view_question(self):
+    def _show_view_question(self, start_series=False):
         self._current_view = None
+        if start_series:
+            question_service.load_default_series()
         question = question_service.get_next_question()
         if question is not None:
             self._current_view = QuestionView(
@@ -291,7 +304,7 @@ class UI:
 
     def _show_view_report(self):
         self._current_view = ReportView(
-            self._root, question_service.get_total_score())
+            self._root, question_service.get_total_score(), self._show_view_login)
         self._current_view.pack()
 
     def _handle_answer_button(self):
@@ -303,8 +316,8 @@ class UI:
 
     def _handle_login_button(self):
         self._hide_current_view()
-        self._show_view_question()
+        self._show_view_question(start_series=True)
 
     def _handle_create_button(self):
         self._hide_current_view()
-        self._show_view_question()
+        self._show_view_question(start_series=True)
