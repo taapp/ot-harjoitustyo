@@ -34,5 +34,13 @@ class UserRepository:
             return user
         return None
 
+    def exists_username(self, username):
+        cursor = self._connection.cursor()
+        cursor.execute("SELECT COUNT(*) FROM users WHERE name=?", [username])
+        cnt = cursor.fetchone()[0]
+        if cnt >= 1:
+            return True
+        return False
+
 
 user_repository = UserRepository(get_database_connection())

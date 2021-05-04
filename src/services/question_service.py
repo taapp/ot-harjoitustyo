@@ -52,14 +52,20 @@ class QuestionService:
         return user
 
     def save_user(self, username, password, is_admin):
+        if self.exists_username(username):
+            return False
         user_new = self.create_user(username, password, is_admin)
         user_repository.insert_user(user_new)
+        return True
 
     def load_user(self, username, password):
         return user_repository.load_user(username, password)
 
     def set_current_user(self, user):
         self.cur_user = user
+
+    def exists_username(self, username):
+        return user_repository.exists_username(username)
 
     def load_and_set_user(self, username, password):
         user = self.load_user(
