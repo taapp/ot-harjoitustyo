@@ -15,6 +15,8 @@ class QuestionService:
         self.i_cur_question = None
         self.cur_answers = None
         self.cur_user = None
+        self.list_series = None
+        self.list_questions = None
 
     def load_default_series(self):
         """Lataa default-kysymyssarjan ja alustaa vastausattribuutit.
@@ -22,6 +24,17 @@ class QuestionService:
         self.cur_series = series_repository.get_default_series()
         self.i_cur_question = None
         self.cur_answers = []
+
+    def load_series_by_id(self, id_series):
+        self.cur_series = series_repository.get_series(id_series)
+        self.i_cur_question = None
+        self.cur_answers = []
+
+    def load_all_series(self):
+        self.list_series = series_repository.get_series_all()
+
+    def load_all_questions(self):
+        self.list_questions = series_repository.get_questions_all()
 
     def get_current_question(self):
         """Palauttaa tällä hetkellä vuorossa olevan kysymyksen.
@@ -160,6 +173,11 @@ class QuestionService:
         user = self.load_user(
             username, password)
         self.set_current_user(user)
+
+    def current_user_is_admin(self):
+        if self.cur_user is None:
+            return None
+        return self.cur_user.admin
 
 
 question_service = QuestionService()

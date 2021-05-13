@@ -32,6 +32,11 @@ class SeriesRepository:
         series = self.get_questions_for_series(series)
         return series
 
+    def get_series(self, id_series):
+        series = self.get_series_by_id(id_series)
+        series = self.get_questions_for_series(series)
+        return series
+
     def create_uuid(self):
         uuid_new = str(uuid.uuid4())
         return uuid_new
@@ -72,21 +77,41 @@ class SeriesRepository:
 
     def get_series_by_name(self, name):
         cursor = self._connection.cursor()
-        cursor.execute(f"SELECT id, name FROM series WHERE name=?", [name])
+        cursor.execute("SELECT id, name FROM series WHERE name=?", [name])
         id_series, name = cursor.fetchone()
         return Series(id_series, name)
+
+    def get_series_by_id(self, id_series):
+        cursor = self._connection.cursor()
+        cursor.execute("SELECT id, name FROM series WHERE id=?", [id_series])
+        id_series, name = cursor.fetchone()
+        return Series(id_series, name)
+
+    def get_series_all(self):
+        cursor = self._connection.cursor()
+        cursor.execute("SELECT id, name FROM series")
+        fetched = cursor.fetchall()
+        ls_series = [Series(*t) for t in fetched]
+        return ls_series
+
+    def get_questions_all(self):
+        cursor = self._connection.cursor()
+        cursor.execute("SELECT id, truth, statement, comment FROM questions")
+        fetched = cursor.fetchall()
+        ls_questions = [Question(*t) for t in fetched]
+        return ls_questions
 
     def get_questions_for_series(self, series):
         series.empty_questions()
         cursor = self._connection.cursor()
         cursor.execute(
-            f"SELECT id_question FROM series_questions WHERE id_series=?", [series.id])
+            "SELECT id_question FROM series_questions WHERE id_series=?", [series.id])
         ids_questions = cursor.fetchall()
         if ids_questions is None:
             return None
         for id_question in ids_questions:
             cursor.execute(
-                f"SELECT id, truth, statement, comment FROM questions WHERE id=?", id_question)
+                "SELECT id, truth, statement, comment FROM questions WHERE id=?", id_question)
             id_question, truth, statement, comment = cursor.fetchone()
             question = Question(
                 id_question, truth, statement, comment)
