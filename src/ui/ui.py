@@ -380,7 +380,7 @@ class SeriesListView:
         for i, series in enumerate(question_service.list_series):
             ttk.Label(scrollable_body, text=series.name).grid(
                 row=i+1, column=1)
-            ttk.Button(scrollable_body, text="Take quiz",
+            ttk.Button(scrollable_body, text="Take this quiz",
                        # command=partialmethod(_handle_button_click_take_quiz, id_series=series.id
                        command=partial(
                            self._handle_button_click_take_quiz, id_series=series.id)
@@ -401,34 +401,34 @@ class SeriesListView:
         # self._canvas.pack(side=constants.LEFT, fill=constants.BOTH, expand=True)
         # self.windows_item = self._canvas.create_window(0, 0, window=self._frame_canvas, anchor=constants.NW)
 
-    def _handle_button_click_create(self):
-        entry_username = self._entry_username.get()
-        entry_password = self._entry_password.get()
-        is_admin = self._check_admin.get()
-        #print(entry_username, entry_password, is_admin)
-        if len(entry_username) == 0 or len(entry_password) == 0:
-            self._error_text_var.set(
-                "Error: Empty usernames or passwords are not permitted.")
-            self.pack()
-            return
-        if question_service.exists_username(entry_username):
-            self._error_text_var.set("Error: The username already exists.")
-            self.pack()
-            return
-        question_service.save_user(
-            entry_username, entry_password, bool(is_admin))
-        self._button_handler_create()
+    # def _handle_button_click_create(self):
+    #     entry_username = self._entry_username.get()
+    #     entry_password = self._entry_password.get()
+    #     is_admin = self._check_admin.get()
+    #     #print(entry_username, entry_password, is_admin)
+    #     if len(entry_username) == 0 or len(entry_password) == 0:
+    #         self._error_text_var.set(
+    #             "Error: Empty usernames or passwords are not permitted.")
+    #         self.pack()
+    #         return
+    #     if question_service.exists_username(entry_username):
+    #         self._error_text_var.set("Error: The username already exists.")
+    #         self.pack()
+    #         return
+    #     question_service.save_user(
+    #         entry_username, entry_password, bool(is_admin))
+    #     self._button_handler_create()
 
-    def _handle_button_click_login(self):
-        entry_username = self._entry_username.get()
-        entry_password = self._entry_password.get()
-        question_service.load_and_set_user(entry_username, entry_password)
-        if question_service.cur_user is None:
-            self._error_text_var.set(
-                "Error: The login information does not match existing users.")
-            self.pack()
-            return
-        self._button_handler_login()
+    # def _handle_button_click_login(self):
+    #     entry_username = self._entry_username.get()
+    #     entry_password = self._entry_password.get()
+    #     question_service.load_and_set_user(entry_username, entry_password)
+    #     if question_service.cur_user is None:
+    #         self._error_text_var.set(
+    #             "Error: The login information does not match existing users.")
+    #         self.pack()
+    #         return
+    #     self._button_handler_login()
 
 
 class UI:
@@ -493,7 +493,7 @@ class UI:
         if question_service.current_user_is_admin():
             self._show_view_admin()
         else:
-            self._show_view_question(start_series=True)
+            self._show_view_series_list()
 
     def _handle_create_button(self):
         self._hide_current_view()
@@ -504,8 +504,81 @@ class UI:
         self._hide_current_view()
         self._show_view_question(start_series=True, id_series=id_series)
 
-    def _show_view_admin(self):
+    def _show_view_series_list(self):
         self._hide_current_view()
         self._current_view = SeriesListView(
             self._root, self._handle_take_quiz_button)
         self._current_view.pack()
+
+    def _handle_series_list_button(self):
+        self._hide_current_view()
+        self._show_view_series_list()
+
+
+    def _show_view_admin(self):
+        self._hide_current_view()
+        self._current_view = AdminView(
+            self._root, self._handle_create_button, self._handle_series_list_button)
+        self._current_view.pack()
+
+class AdminView:
+    def __init__(self, root, button_handler_create_series, button_handler_series_list):
+        self._root = root
+        #self._question_text = question_text
+        self._frame = None
+        self._check_admin = None
+        self._button_handler_create_series = button_handler_create_series
+        self._button_handler_series_list = button_handler_series_list
+
+        self._initialize()
+
+    def pack(self):
+        self._frame.pack(fill=constants.X)
+
+    def destroy(self):
+        self._frame.destroy()
+
+    def _initialize(self):
+        self._frame = ttk.Frame(master=self._root)
+        label_welcome = ttk.Label(
+            master=self._frame, text="Welcome.")
+        
+        button_create_user = ttk.Button(
+            master=self._frame,
+            text="Create a quiz",
+            command=self._handle_button_click_create
+        )
+
+        button_login = ttk.Button(
+            master=self._frame,
+            text="Take a quiz",
+            command=self._button_handler_series_list
+        )
+
+        #label.grid(row=0, column=0)
+        #button.grid(row=1, column=0)
+        label_welcome.grid()
+        button_create_user.grid()
+        button_login.grid()
+
+
+    def _handle_button_click_create(self):
+        entry_username = self._entry_username.get()
+        entry_password = self._entry_password.get()
+        is_admin = self._check_admin.get()
+        #print(entry_username, entry_password, is_admin)
+        if len(entry_username) == 0 or len(entry_password) == 0:
+            self._error_text_var.set(
+                "Error: Empty usernames or passwords are not permitted.")
+            self.pack()
+            return
+        if question_service.exists_username(entry_username):
+            self._error_text_var.set("Error: The username already exists.")
+            self.pack()
+            return
+        question_service.save_user(
+            entry_username, entry_password, bool(is_admin))
+        self._button_handler_create()
+
+    def _handle_button_series_list(self):
+        self._button_handler_series_list()
