@@ -5,7 +5,7 @@ from ui.ui import UI
 def main():
 
     window = Tk()
-    window.title("TkInter example")
+    window.title("Probability quiz")
 
     ui = UI(window)
     ui.start()
