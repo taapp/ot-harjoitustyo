@@ -502,7 +502,7 @@ class UI:
 
     def _handle_create_button(self):
         self._hide_current_view()
-        self._show_view_question(start_series=True)
+        self._show_view_series_list()
 
     def _handle_take_quiz_button(self, id_series=None):
         print(f"_handle_take_quiz_button, id_series: {id_series}")
