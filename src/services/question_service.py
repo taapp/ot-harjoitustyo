@@ -86,10 +86,14 @@ class QuestionService:
 
     def get_total_score(self):
         """Palauttaa kokonaispistemäärän (pisteiden keskiarvon) käsittelyssä oleville vastauksille.
+        Jos käsittelyssä ei ole yhtään vastausta, palautetaan None.
 
         Returns:
-            Numeroarvo, joka vastaa kokonaispistetulosta eli Brier-pisteytystä.
+            Palautetaan numeroarvo, joka vastaa kokonaispistetulosta eli Brier-pisteytystä,
+            tai palautetaan None, jos käsittelyssä ei ole yhtään vastausta.
         """
+        if len(self.cur_answers)==0:
+            return None
         return sum([answer.score() for answer in self.cur_answers])/len(self.cur_answers)
 
     def create_uuid(self):

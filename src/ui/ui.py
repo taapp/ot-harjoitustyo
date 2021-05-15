@@ -86,8 +86,13 @@ class ReportView:
         self._frame = ttk.Frame(master=self._root)
         label = ttk.Label(master=self._frame,
                           text="Report for the question series:")
-        label_score = ttk.Label(
-            master=self._frame, text=f"The total Brier score is {self._score_total:.3f} (smaller is better, 0 is minimum)")
+        if self._score_total is None:
+            label_score = ttk.Label(master=self._frame, text=f"The score cannot be calculated as there are no answers.")
+        else:
+            text_label_score = f"The total Brier score is {self._score_total:.3f}" + \
+                "(smaller is better, 0 is minimum)"
+            label_score = ttk.Label(
+                master=self._frame, text=text_label_score)
         button_logout = ttk.Button(
             master=self._frame,
             text="Logout",
