@@ -2,10 +2,13 @@ import unittest
 
 from services.question_service import question_service
 from entities.answer import Answer
+from build import build
 
 
 class TestQuestionService(unittest.TestCase):
     def setUp(self):
+        build()
+        question_service.load_default_series()
         question_service.cur_answers.append(
             Answer(1, question_service.cur_series.questions[0], 1))
         question_service.cur_answers.append(

@@ -87,7 +87,8 @@ class ReportView:
         label = ttk.Label(master=self._frame,
                           text="Report for the question series:")
         if self._score_total is None:
-            label_score = ttk.Label(master=self._frame, text=f"The score cannot be calculated as there are no answers.")
+            label_score = ttk.Label(
+                master=self._frame, text=f"The score cannot be calculated as there are no answers.")
         else:
             text_label_score = f"The total Brier score is {self._score_total:.3f}" + \
                 "(smaller is better, 0 is minimum)"
@@ -505,7 +506,6 @@ class UI:
         print("UI, _handle_create_button")
         self._hide_current_view()
         self._show_view_login()
-        
 
     def _handle_take_quiz_button(self, id_series=None):
         print(f"_handle_take_quiz_button, id_series: {id_series}")
@@ -655,9 +655,9 @@ class CreateSeriesView:
             self.pack()
             return
         question_service.load_series_by_name(series_name)
-        print("CreateSeriesView, _handle_button_click_create_questions, series: {series}, question_service.cur_series: {question_service.cur_series}")
+        print(
+            "CreateSeriesView, _handle_button_click_create_questions, series: {series}, question_service.cur_series: {question_service.cur_series}")
         self._button_handler_create_questions()
-
 
 
 class CreateQuestionView:
@@ -710,7 +710,7 @@ class CreateQuestionView:
             text="Create question",
             command=self._handle_button_click_create_question
         )
-        
+
         button_end_series = ttk.Button(
             master=self._frame,
             text="End series",
@@ -730,7 +730,7 @@ class CreateQuestionView:
     def _handle_button_click_create_question(self):
         statement = self._entry_statement.get()
         truth = self._check_truth_var.get()
-        comment = self._entry_comment.get()        
+        comment = self._entry_comment.get()
         question_service.save_question(truth, statement, comment)
         self._button_handler_create_question()
 

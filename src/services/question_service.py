@@ -15,7 +15,7 @@ class QuestionService:
         """
         self.cur_series = None
         self.i_cur_question = None
-        self.cur_answers = None
+        self.cur_answers = []
         self.cur_user = None
         self.list_series = None
         self.list_questions = None
@@ -99,7 +99,7 @@ class QuestionService:
             Palautetaan numeroarvo, joka vastaa kokonaispistetulosta eli Brier-pisteytystä,
             tai palautetaan None, jos käsittelyssä ei ole yhtään vastausta.
         """
-        if len(self.cur_answers)==0:
+        if len(self.cur_answers) == 0:
             return None
         return sum([answer.score() for answer in self.cur_answers])/len(self.cur_answers)
 
@@ -262,7 +262,6 @@ class QuestionService:
         question = Question(uuid_series, truth, statement, comment)
         return question
 
-
     def save_question(self, truth, statement, comment):
         """Luo uuden kysymyksen ja tallentaa sen käsittelyssä olevalle kysymyssarjalle.
 
@@ -272,9 +271,10 @@ class QuestionService:
             comment: Merkkijono, joka vastaa kysymyksen kommenttia.
         """
         question = self.create_question(truth, statement, comment)
-        print(f"QuestionService, save_question, question: {question}, self.cur_series: {self.cur_series}")
+        print(
+            f"QuestionService, save_question, question: {question}, self.cur_series: {self.cur_series}")
         series_repository.save_question_for_series(question, self.cur_series)
 
 
 question_service = QuestionService()
-#question_service.load_default_series()
+# question_service.load_default_series()
