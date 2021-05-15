@@ -1,5 +1,6 @@
 from repositories.series_repository import series_repository
 from repositories.user_repository import user_repository
+from entities.series import Series
 from entities.answer import Answer
 from entities.user import User
 import uuid
@@ -178,6 +179,46 @@ class QuestionService:
         if self.cur_user is None:
             return None
         return self.cur_user.admin
+
+    def create_series(self, name):
+        """Luo uuden kysymyssarjan.
+
+        Args:
+            name: Merkkijono, joka vastaa kysymyssarjan nimeä.
+
+        Returns:
+            Series-olio, joka vastaa uutta kysymyssarjaa.
+        """
+        uuid_series = self.create_uuid()
+        series = Series(uuid_series, name)
+        return series
+
+    def exists_series_name(self, name):
+        """Kertoo, onko annettu kysymyssarjan nimi tallennettu aikaisemmin.
+
+        Args:
+            name: Merkkijono, joka vastaa kysymyssarjan nimeä.
+
+        Returns:
+            Boolean-arvo, joka kertoo, onko kysymyssarjan nimi tallennettu aiemmin.
+        """
+        return series_repository.exists_series_name(name)
+
+    def save_series(self, name):
+        """Luo ja tallentaa uuden kysymyssarjan, jos samaa kysymyssarjaa ei ole vielä olemassa.
+
+        Args:
+            name: Merkkijono, joka vastaa kysymyssarjan nimeä.
+
+        Returns:
+            Boolean-arvo, jonka arvo on False, jos sama kysymyssarja on jo olemassa,
+            ja True muussa tapauksessa.
+        """
+        if self.exists_series_name(name):
+            return False
+        series_new = self.create_series(name)
+        series_repository.insert_series(series_new)
+        return True
 
 
 question_service = QuestionService()

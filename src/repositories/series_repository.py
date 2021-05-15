@@ -146,6 +146,14 @@ class SeriesRepository:
             self.insert_question(question)
             self.insert_series_questions(series.id, question.id)
 
+    def exists_series_name(self, name):
+        cursor = self._connection.cursor()
+        cursor.execute("SELECT COUNT(*) FROM series WHERE name=?", [name])
+        cnt = cursor.fetchone()[0]
+        if cnt >= 1:
+            return True
+        return False
+
 
 series_repository = SeriesRepository(
     Path(__file__).parent.parent / 'data' / "default_series.csv", get_database_connection())

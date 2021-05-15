@@ -514,12 +514,22 @@ class UI:
         self._hide_current_view()
         self._show_view_series_list()
 
-
     def _show_view_admin(self):
         self._hide_current_view()
         self._current_view = AdminView(
-            self._root, self._handle_create_button, self._handle_series_list_button)
+            self._root, self._handle_create_series_button, self._handle_series_list_button)
         self._current_view.pack()
+
+    def _handle_create_series_button(self):
+        self._hide_current_view()
+        self._show_view_create_series()
+
+    def _show_view_create_series(self):
+        self._hide_current_view()
+        self._current_view = CreateSeriesView(
+            self._root, self._handle_create_series_button)
+        self._current_view.pack()
+
 
 class AdminView:
     def __init__(self, root, button_handler_create_series, button_handler_series_list):
@@ -542,11 +552,11 @@ class AdminView:
         self._frame = ttk.Frame(master=self._root)
         label_welcome = ttk.Label(
             master=self._frame, text="Welcome.")
-        
+
         button_create_user = ttk.Button(
             master=self._frame,
             text="Create a quiz",
-            command=self._handle_button_click_create
+            command=self._handle_button_click_create_series
         )
 
         button_login = ttk.Button(
@@ -561,24 +571,63 @@ class AdminView:
         button_create_user.grid()
         button_login.grid()
 
-
-    def _handle_button_click_create(self):
-        entry_username = self._entry_username.get()
-        entry_password = self._entry_password.get()
-        is_admin = self._check_admin.get()
-        #print(entry_username, entry_password, is_admin)
-        if len(entry_username) == 0 or len(entry_password) == 0:
-            self._error_text_var.set(
-                "Error: Empty usernames or passwords are not permitted.")
-            self.pack()
-            return
-        if question_service.exists_username(entry_username):
-            self._error_text_var.set("Error: The username already exists.")
-            self.pack()
-            return
-        question_service.save_user(
-            entry_username, entry_password, bool(is_admin))
-        self._button_handler_create()
+    def _handle_button_click_create_series(self):
+        self._button_handler_create_series()
 
     def _handle_button_series_list(self):
         self._button_handler_series_list()
+
+
+class CreateSeriesView:
+    def __init__(self, root, button_handler_create_questions):
+        self._root = root
+        #self._question_text = question_text
+        self._frame = None
+        self._entry_series_name = None
+        self._error_text_var = None
+        self._button_handler_create_questions = button_handler_create_questions
+
+        self._initialize()
+
+    def pack(self):
+        self._frame.pack(fill=constants.X)
+
+    def destroy(self):
+        self._frame.destroy()
+
+    def _initialize(self):
+        self._frame = ttk.Frame(master=self._root)
+
+        label_instruction = ttk.Label(
+            master=self._frame, text="series name: ")
+
+        self._entry_series_name = ttk.Entry(master=self._frame)
+        button_create_questions = ttk.Button(
+            master=self._frame,
+            text="Start creating questions",
+            command=self._handle_button_click_create_questions
+        )
+        self._error_text_var = StringVar()
+        self._error_text_var.set("")
+        label_error = ttk.Label(
+            master=self._frame, textvariable=self._error_text_var)
+
+        label_instruction.grid(row=1, column=0)
+        self._entry_series_name.grid(row=1, column=1)
+        label_error.grid()
+        button_create_questions.grid()
+
+    def _handle_button_click_create_questions(self):
+        series_name = self._entry_series_name.get()
+        if len(series_name) < 1 or len(series_name) > 16:
+            self._error_text_var.set(
+                "Error: A series name has to be 1-16 characters.")
+            self.pack()
+            return
+        # if question_service.exists_username(entry_username):
+        #    self._error_text_var.set("Error: The username already exists.")
+        #    self.pack()
+        #    return
+        question_service.save_series(
+            series_name)
+        self._button_handler_create_questions()
