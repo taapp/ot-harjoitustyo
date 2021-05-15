@@ -180,7 +180,7 @@ class LoginView:
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
         label_welcome = ttk.Label(
-            master=self._frame, text="Welcome. Create a new user and login.")
+            master=self._frame, text="Welcome. Create a new user or login.")
         label_username = ttk.Label(master=self._frame, text="Username: ")
         label_password = ttk.Label(master=self._frame, text="Password: ")
         #radio_button = ttk.Radiobutton(master=self._frame, text = 'Admin')
@@ -198,7 +198,7 @@ class LoginView:
 
         button_create_user = ttk.Button(
             master=self._frame,
-            text="Create user and login",
+            text="Create a new user",
             command=self._handle_button_click_create
         )
 
@@ -217,8 +217,8 @@ class LoginView:
         self._entry_password.grid(row=2, column=1)
         check_button.grid(row=3)
         label_error.grid(row=4)
-        button_create_user.grid(row=5, column=1)
-        button_login.grid(row=5, column=2)
+        button_create_user.grid(row=5, column=0)
+        button_login.grid(row=5, column=1)
 
     def _handle_button_click_create(self):
         entry_username = self._entry_username.get()
@@ -494,6 +494,7 @@ class UI:
             self._show_view_question()
 
     def _handle_login_button(self):
+        print("UI, _handle_login_button")
         self._hide_current_view()
         if question_service.current_user_is_admin():
             self._show_view_admin()
@@ -501,8 +502,10 @@ class UI:
             self._show_view_series_list()
 
     def _handle_create_button(self):
+        print("UI, _handle_create_button")
         self._hide_current_view()
-        self._show_view_series_list()
+        self._show_view_login()
+        
 
     def _handle_take_quiz_button(self, id_series=None):
         print(f"_handle_take_quiz_button, id_series: {id_series}")
@@ -526,14 +529,29 @@ class UI:
         self._current_view.pack()
 
     def _handle_create_series_button(self):
+        print("UI, _handle_create_series_button")
         self._hide_current_view()
         self._show_view_create_series()
 
     def _show_view_create_series(self):
         self._hide_current_view()
         self._current_view = CreateSeriesView(
-            self._root, self._handle_create_series_button)
+            self._root, self._handle_create_question_button)
         self._current_view.pack()
+
+    def _handle_create_question_button(self):
+        self._hide_current_view()
+        self._show_view_create_question()
+
+    def _show_view_create_question(self):
+        self._hide_current_view()
+        self._current_view = CreateQuestionView(
+            self._root, self._handle_create_question_button, self._handle_end_series_button)
+        self._current_view.pack()
+
+    def _handle_end_series_button(self):
+        question_service.empty_current_series()
+        self._handle_login_button()
 
 
 class AdminView:
@@ -577,6 +595,7 @@ class AdminView:
         button_login.grid()
 
     def _handle_button_click_create_series(self):
+        print("Adminview, _handle_button_click_create_series")
         self._button_handler_create_series()
 
     def _handle_button_series_list(self):
@@ -629,10 +648,91 @@ class CreateSeriesView:
                 "Error: A series name has to be 1-16 characters.")
             self.pack()
             return
-        # if question_service.exists_username(entry_username):
-        #    self._error_text_var.set("Error: The username already exists.")
-        #    self.pack()
-        #    return
-        question_service.save_series(
-            series_name)
+        saved = question_service.save_series(series_name)
+        if not saved:
+            self._error_text_var.set(
+                "Error: A series with the name already exists.")
+            self.pack()
+            return
+        question_service.load_series_by_name(series_name)
+        print("CreateSeriesView, _handle_button_click_create_questions, series: {series}, question_service.cur_series: {question_service.cur_series}")
         self._button_handler_create_questions()
+
+
+
+class CreateQuestionView:
+    def __init__(self, root, button_handler_create_question, button_handler_end_series):
+        self._root = root
+        #self._question_text = question_text
+        self._frame = None
+        self._entry_statement = None
+        self._check_truth_var = None
+        self._entry_truth = None
+        self._entry_comment = None
+        self._error_var = None
+        self._button_handler_create_question = button_handler_create_question
+        self._button_handler_end_series = button_handler_end_series
+
+        self._initialize()
+
+    def pack(self):
+        self._frame.pack(fill=constants.X)
+
+    def destroy(self):
+        self._frame.destroy()
+
+    def _initialize(self):
+        self._frame = ttk.Frame(master=self._root)
+
+        label_statement = ttk.Label(
+            master=self._frame, text="statement: ")
+        self._entry_statement = ttk.Entry(master=self._frame)
+
+        label_truth = ttk.Label(
+            master=self._frame, text="check if true: ")
+        self._entry_truth = ttk.Entry(master=self._frame)
+
+        self._check_truth_var = IntVar()
+        check_truth = ttk.Checkbutton(
+            master=self._frame, text=' ', variable=self._check_truth_var, onvalue=1, offvalue=0)
+
+        label_comment = ttk.Label(
+            master=self._frame, text="comment: ")
+        self._entry_comment = ttk.Entry(master=self._frame)
+
+        self._error_var = StringVar()
+        self._error_var.set("")
+        label_error = ttk.Label(
+            master=self._frame, textvariable=self._error_var)
+
+        button_create_question = ttk.Button(
+            master=self._frame,
+            text="Create question",
+            command=self._handle_button_click_create_question
+        )
+        
+        button_end_series = ttk.Button(
+            master=self._frame,
+            text="End series",
+            command=self._handle_button_click_end_series
+        )
+
+        label_statement.grid(row=1, column=0)
+        self._entry_statement.grid(row=1, column=1)
+        label_truth.grid(row=2, column=0)
+        check_truth.grid(row=2, column=1)
+        label_comment.grid(row=3, column=0)
+        self._entry_comment.grid(row=3, column=1)
+        label_error.grid(row=4)
+        button_create_question.grid(row=5, column=0)
+        button_end_series.grid(row=5, column=1)
+
+    def _handle_button_click_create_question(self):
+        statement = self._entry_statement.get()
+        truth = self._check_truth_var.get()
+        comment = self._entry_comment.get()        
+        question_service.save_question(truth, statement, comment)
+        self._button_handler_create_question()
+
+    def _handle_button_click_end_series(self):
+        self._button_handler_end_series()

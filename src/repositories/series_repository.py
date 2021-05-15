@@ -146,6 +146,10 @@ class SeriesRepository:
             self.insert_question(question)
             self.insert_series_questions(series.id, question.id)
 
+    def save_question_for_series(self, question, series):
+        self.insert_question(question)
+        self.insert_series_questions(series.id, question.id)
+
     def exists_series_name(self, name):
         cursor = self._connection.cursor()
         cursor.execute("SELECT COUNT(*) FROM series WHERE name=?", [name])

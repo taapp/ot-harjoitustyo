@@ -1,6 +1,7 @@
 from repositories.series_repository import series_repository
 from repositories.user_repository import user_repository
 from entities.series import Series
+from entities.question import Question
 from entities.answer import Answer
 from entities.user import User
 import uuid
@@ -22,12 +23,18 @@ class QuestionService:
     def load_default_series(self):
         """Lataa default-kysymyssarjan ja alustaa vastausattribuutit.
         """
+        print("QuestionService, load_default_series")
         self.cur_series = series_repository.get_default_series()
         self.i_cur_question = None
         self.cur_answers = []
 
     def load_series_by_id(self, id_series):
         self.cur_series = series_repository.get_series(id_series)
+        self.i_cur_question = None
+        self.cur_answers = []
+
+    def load_series_by_name(self, name):
+        self.cur_series = series_repository.get_series_by_name(name)
         self.i_cur_question = None
         self.cur_answers = []
 
@@ -224,6 +231,50 @@ class QuestionService:
         series_repository.insert_series(series_new)
         return True
 
+    def set_current_series(self, series):
+        """Asettaa kysymyssarjan käsiteltäväksi kysymyssarjaksi
+
+        Args:
+            series: Series-olio, joka vastaa käsittelyyn menevää kysmyssarjaa
+
+        Returns:
+            Series-olio, joka on nyt käsittelyssä
+        """
+        self.cur_series = series
+        return series
+
+    def empty_current_series(self):
+        """Asetetaan, että kysymyssarjaa ei ole käsittelyssä"""
+        self.cur_series = None
+
+    def create_question(self, truth, statement, comment):
+        """Luo uuden kysymyksen.
+
+        Args:
+            truth: Kokonaisluku, jonka arvo 0 tai 1, joka vastaa kysymysväitteen totuusarvoa.
+            statement: Merkkijono, joka vastaa kysymyksen väitettä.            
+            comment: Merkkijono, joka vastaa kysymyksen kommenttia.
+
+        Returns:
+            Series-olio, joka vastaa uutta kysymyssarjaa.
+        """
+        uuid_series = self.create_uuid()
+        question = Question(uuid_series, truth, statement, comment)
+        return question
+
+
+    def save_question(self, truth, statement, comment):
+        """Luo uuden kysymyksen ja tallentaa sen käsittelyssä olevalle kysymyssarjalle.
+
+        Args:
+            truth: Kokonaisluku, jonka arvo 0 tai 1, joka vastaa kysymysväitteen totuusarvoa.
+            statement: Merkkijono, joka vastaa kysymyksen väitettä.
+            comment: Merkkijono, joka vastaa kysymyksen kommenttia.
+        """
+        question = self.create_question(truth, statement, comment)
+        print(f"QuestionService, save_question, question: {question}, self.cur_series: {self.cur_series}")
+        series_repository.save_question_for_series(question, self.cur_series)
+
 
 question_service = QuestionService()
-question_service.load_default_series()
+#question_service.load_default_series()
