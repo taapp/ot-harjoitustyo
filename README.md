@@ -14,6 +14,8 @@ Sovelluksen on suunniteltu toimivan Python-versiolla 3.6 ja sitä korkeammilla v
 
 [Arkkitehtuurikuvaus](https://github.com/taapp/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
+[Testausdokumentti](https://github.com/taapp/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md)
+
 [Työaikakirjanpito](https://github.com/taapp/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
 
 ## Releaset
