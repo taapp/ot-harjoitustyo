@@ -20,22 +20,37 @@ class QuestionService:
         self.list_series = None
         self.list_questions = None
 
+    def initialize_answer_attributes(self):
+        """Alustaa kysymyssarjaan vastaamisen tarvittavat attribuutit.
+        """
+        self.i_cur_question = None
+        self.cur_answers = []
+
     def load_default_series(self):
-        """Lataa default-kysymyssarjan ja alustaa vastausattribuutit.
+        """Lataa default-kysymyssarjan ja alustaa vastaamisen tarvittavat attribuutit.
         """
         self.cur_series = series_repository.get_default_series()
-        self.i_cur_question = None
-        self.cur_answers = []
+        self.initialize_answer_attributes()
 
     def load_series_by_id(self, id_series):
+        """Lataa kysymyssarjan id:n perusteella, asettaa sen käsittelyssä olevaksi kysymyssarjaksi,
+        ja alustaa vastaamisen tarvittavat attribuutit.
+
+        Args:
+            id_series: Merkkijono, joka on haetun kysymyssarjan id
+        """
         self.cur_series = series_repository.get_series(id_series)
-        self.i_cur_question = None
-        self.cur_answers = []
+        self.initialize_answer_attributes()
 
     def load_series_by_name(self, name):
+        """Lataa kysymyssarjan nimen perusteella, asettaa sen käsittelyssä olevaksi kysymyssarjaksi,
+        ja alustaa vastaamisen tarvittavat attribuutit.
+
+        Args:
+            id_series: Merkkijono, joka on haetun kysymyssarjan nimi
+        """
         self.cur_series = series_repository.get_series_by_name(name)
-        self.i_cur_question = None
-        self.cur_answers = []
+        self.initialize_answer_attributes()
 
     def load_all_series(self):
         self.list_series = series_repository.get_series_all()
@@ -135,7 +150,8 @@ class QuestionService:
             is_admin: Boolean-arvo, joka kertoo onko uusi käyttäjä pääkäyttäjä.
 
         Returns:
-            Boolean-arvo, jonka arvo on False, jos sama käyttäjänimi on jo olemassa, ja True muussa tapauksessa.
+            Boolean-arvo, jonka arvo on False, jos sama käyttäjänimi on jo olemassa,
+            ja True muussa tapauksessa.
         """
         if self.exists_username(username):
             return False
@@ -186,6 +202,11 @@ class QuestionService:
         self.set_current_user(user)
 
     def current_user_is_admin(self):
+        """Kertoo, onko tämänhetkinen käyttäjä pääkäyttäjä
+
+        Returns:
+            Boolearn-arvo, onko tämänhetkinen käyttäjä pääkäyttäjä
+        """
         if self.cur_user is None:
             return None
         return self.cur_user.admin
@@ -251,7 +272,7 @@ class QuestionService:
 
         Args:
             truth: Kokonaisluku, jonka arvo 0 tai 1, joka vastaa kysymysväitteen totuusarvoa.
-            statement: Merkkijono, joka vastaa kysymyksen väitettä.            
+            statement: Merkkijono, joka vastaa kysymyksen väitettä.       
             comment: Merkkijono, joka vastaa kysymyksen kommenttia.
 
         Returns:
@@ -274,4 +295,3 @@ class QuestionService:
 
 
 question_service = QuestionService()
-# question_service.load_default_series()
