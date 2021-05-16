@@ -67,7 +67,6 @@ class SeriesListView:
         self._frame_canvas.destroy()
 
     def _handle_button_click_take_quiz(self, id_series):
-        print(f"_handle_button_click_take_quiz, id_series: {id_series}")
         self._button_handler_take_quiz(id_series)
 
     def _initialize(self):

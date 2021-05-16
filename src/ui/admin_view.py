@@ -51,7 +51,6 @@ class AdminView:
         button_logout.grid()
 
     def _handle_button_click_create_series(self):
-        print("Adminview, _handle_button_click_create_series")
         self._button_handler_create_series()
 
     def _handle_button_click_series_list(self):

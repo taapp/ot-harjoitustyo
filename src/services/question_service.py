@@ -23,7 +23,6 @@ class QuestionService:
     def load_default_series(self):
         """Lataa default-kysymyssarjan ja alustaa vastausattribuutit.
         """
-        print("QuestionService, load_default_series")
         self.cur_series = series_repository.get_default_series()
         self.i_cur_question = None
         self.cur_answers = []
@@ -271,8 +270,6 @@ class QuestionService:
             comment: Merkkijono, joka vastaa kysymyksen kommenttia.
         """
         question = self.create_question(truth, statement, comment)
-        print(
-            f"QuestionService, save_question, question: {question}, self.cur_series: {self.cur_series}")
         series_repository.save_question_for_series(question, self.cur_series)
 
 

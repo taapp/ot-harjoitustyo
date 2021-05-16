@@ -56,6 +56,4 @@ class CreateSeriesView:
             self.pack()
             return
         question_service.load_series_by_name(series_name)
-        print(
-            "CreateSeriesView, _handle_button_click_create_questions, series: {series}, question_service.cur_series: {question_service.cur_series}")
         self._button_handler_create_questions()

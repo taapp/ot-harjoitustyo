@@ -30,15 +30,12 @@ class UI:
 
     def _show_view_question(self, start_series=False, id_series=None):
         self._current_view = None
-        print(
-            f"_show_view_question, start_series: {start_series}, id_series: {id_series}")
         if start_series:
             if id_series is None:
                 question_service.load_default_series()
             else:
                 question_service.load_series_by_id(id_series)
         question = question_service.get_next_question()
-        print(f"question: {question}")
         if question is not None:
             self._current_view = QuestionView(
                 self._root, question.statement, self._handle_answer_button)
@@ -60,7 +57,6 @@ class UI:
             self._show_view_question()
 
     def _handle_login_button(self):
-        print("UI, _handle_login_button")
         self._hide_current_view()
         if question_service.current_user_is_admin():
             self._show_view_admin()
@@ -68,12 +64,10 @@ class UI:
             self._show_view_series_list()
 
     def _handle_create_button(self):
-        print("UI, _handle_create_button")
         self._hide_current_view()
         self._show_view_login()
 
     def _handle_take_quiz_button(self, id_series=None):
-        print(f"_handle_take_quiz_button, id_series: {id_series}")
         self._hide_current_view()
         self._show_view_question(start_series=True, id_series=id_series)
 
@@ -94,7 +88,6 @@ class UI:
         self._current_view.pack()
 
     def _handle_create_series_button(self):
-        print("UI, _handle_create_series_button")
         self._hide_current_view()
         self._show_view_create_series()
 
