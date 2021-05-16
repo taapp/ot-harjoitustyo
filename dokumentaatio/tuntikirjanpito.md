@@ -15,4 +15,7 @@
 | 27.4. | 3    | Kirjautumiseen liittyvän käyttöliittymän ja logiikan tekeminen, sekvenssikaavioiden tekeminen |
 | 3.5. | 1    | Pieniä parannuksia |
 | 4.5. | 4    | Syötteiden virheenkäsittely, docstringit, käyttäjän uloskirjautuminen, käyttöohje |
-| yht    | 28    |  |
+| 13.5. | 3    | Kehitetty toiminnallisuutta ja käyttöliittymää |
+| 15.5. | 4    | Kehitetty toiminnallisuutta ja käyttöliittymää |
+| 16.5. | 6    | Kehitetty toiminnallisuutta, käyttöliittymää, dokumentaatiota, testausta ja siistitty koodia loppupalautusta varten |
+| yht    | 41    |  |
