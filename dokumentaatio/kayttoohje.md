@@ -20,7 +20,7 @@ poetry run invoke build
 poetry run invoke start
 ```
 
-Huom. Siinä tapauksessa, että testaukseen ja testikattavuuteen liittyviä komentoja on ajettu, niin silloin build-komento tulee suorittaa ennen start-komentoa.
+**Huom. Siinä tapauksessa, että testaukseen ja testikattavuuteen liittyviä komentoja on ajettu, niin silloin build-komento tulee aina suorittaa ennen start-komentoa.**
 
 ## Kirjautuminen
 
