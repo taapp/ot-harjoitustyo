@@ -3,10 +3,19 @@ from database_connection import get_database_connection
 
 
 class UserRepository:
+    """Luokka, joka vastaa käyttäjätiedon tallentamisesta ja hakemisesta tietokannasta.
+    """
+
     def __init__(self, connection):
         self._connection = connection
 
     def insert_user(self, user):
+        """Lisää uuden käyttäjän käyttäjätauluun
+
+        Args:
+            user: User-olio, joka vastaa käyttäjää, jonka tiedot lisätään tietokantaan.
+        """
+
         cursor = self._connection.cursor()
         sql = """INSERT INTO users(id, name, password, is_admin) VALUES (?,?,?,?)"""
         cursor.execute(
@@ -14,11 +23,18 @@ class UserRepository:
         self._connection.commit()
 
     def delete_all(self):
+        """Poistaa tiedot käyttäjätaulusta.
+        """
         cursor = self._connection.cursor()
         cursor.execute("delete from users")
         self._connection.commit()
 
     def count_users(self):
+        """Laskee tallennettujen käyttäjien määrän.
+
+        Returns:
+            cnt: Kokonaisluku, joka vastaa tallennettujen käyttäjien määrää
+        """
         cursor = self._connection.cursor()
         cursor.execute("SELECT COUNT(*) FROM users")
         cnt = cursor.fetchone()

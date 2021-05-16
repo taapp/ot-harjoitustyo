@@ -11,7 +11,7 @@ class QuestionService:
     """Sovelluslogiikkaa sisältävä luokka"""
 
     def __init__(self):
-        """[summary]
+        """Luokan konstruktori, joka luo uuden olion.
         """
         self.cur_series = None
         self.i_cur_question = None
