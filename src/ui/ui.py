@@ -525,7 +525,7 @@ class UI:
     def _show_view_admin(self):
         self._hide_current_view()
         self._current_view = AdminView(
-            self._root, self._handle_create_series_button, self._handle_series_list_button)
+            self._root, self._handle_create_series_button, self._handle_series_list_button, self._show_view_login)
         self._current_view.pack()
 
     def _handle_create_series_button(self):
@@ -555,13 +555,14 @@ class UI:
 
 
 class AdminView:
-    def __init__(self, root, button_handler_create_series, button_handler_series_list):
+    def __init__(self, root, button_handler_create_series, button_handler_series_list, button_handler_logout):
         self._root = root
         #self._question_text = question_text
         self._frame = None
         self._check_admin = None
         self._button_handler_create_series = button_handler_create_series
         self._button_handler_series_list = button_handler_series_list
+        self._button_handler_logout = button_handler_logout
 
         self._initialize()
 
@@ -582,24 +583,34 @@ class AdminView:
             command=self._handle_button_click_create_series
         )
 
-        button_login = ttk.Button(
+        button_series_list = ttk.Button(
             master=self._frame,
             text="Take a quiz",
-            command=self._button_handler_series_list
+            command=self._handle_button_click_series_list
+        )
+
+        button_logout = ttk.Button(
+            master=self._frame,
+            text="Logout",
+            command=self._handle_button_click_logout
         )
 
         #label.grid(row=0, column=0)
         #button.grid(row=1, column=0)
         label_welcome.grid()
         button_create_user.grid()
-        button_login.grid()
+        button_series_list.grid()
+        button_logout.grid()
 
     def _handle_button_click_create_series(self):
         print("Adminview, _handle_button_click_create_series")
         self._button_handler_create_series()
 
-    def _handle_button_series_list(self):
+    def _handle_button_click_series_list(self):
         self._button_handler_series_list()
+
+    def _handle_button_click_logout(self):
+        self._button_handler_logout()
 
 
 class CreateSeriesView:
