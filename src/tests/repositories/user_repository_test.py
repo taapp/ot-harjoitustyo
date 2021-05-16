@@ -14,3 +14,17 @@ class TestUserRepository(unittest.TestCase):
         user_repository.insert_user(self.user_first)
         cnt = user_repository.count_users()[0]
         self.assertEqual(cnt, 1)
+
+    def test_exists_username(self):
+        user_repository.insert_user(self.user_first)
+        res_first = user_repository.exists_username('first')
+        res_second = user_repository.exists_username('second')
+        self.assertEqual(res_first, True)
+        self.assertEqual(res_second, False)
+
+    def test_load_user(self):
+        user_repository.insert_user(self.user_first)
+        res_first = user_repository.load_user('first', 'passwd')
+        res_wrong_password = user_repository.load_user('first', 'passwd1')
+        self.assertEqual(res_first.password, "passwd")
+        self.assertEqual(res_wrong_password, None)
