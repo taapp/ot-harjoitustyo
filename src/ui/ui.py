@@ -91,7 +91,6 @@ class StartSeriesView:
 #         self._button_handler()
 
 
-
 class UI:
     def __init__(self, root):
         self._root = root

@@ -2,6 +2,7 @@ from tkinter import ttk, constants, Canvas
 from services.question_service import question_service
 from functools import partial
 
+
 class Scrollable(ttk.Frame):
     """
        Make a frame scrollable with scrollbar on the right.
