@@ -69,7 +69,8 @@ class SeriesListView:
 
         question_service.load_all_series()
         for i, series in enumerate(question_service.list_series):
-            ttk.Label(scrollable_body, text=series.name).grid(row=i+1, column=1)
+            ttk.Label(scrollable_body, text=series.name).grid(
+                row=i+1, column=1)
             ttk.Button(scrollable_body, text="Take this quiz",
                        command=partial(
                            self._handle_button_click_take_quiz, id_series=series.id)
