@@ -6,7 +6,6 @@ from services.question_service import question_service
 class CreateSeriesView:
     def __init__(self, root, button_handler_create_questions):
         self._root = root
-        #self._question_text = question_text
         self._frame = None
         self._entry_series_name = None
         self._error_text_var = None

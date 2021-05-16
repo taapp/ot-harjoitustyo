@@ -6,7 +6,6 @@ from services.question_service import question_service
 class CreateQuestionView:
     def __init__(self, root, button_handler_create_question, button_handler_end_series):
         self._root = root
-        #self._question_text = question_text
         self._frame = None
         self._entry_statement = None
         self._check_truth_var = None
