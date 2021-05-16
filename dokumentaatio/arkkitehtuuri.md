@@ -42,7 +42,7 @@ Lisäksi on olmeassa erillinen csv-tiedostona "default_series.csv", joka sisält
 
 Aloitusnäkymässä kun antaa käyttänimen ja salasanan, niin tapahtuu seuraavan kuvan mukainen tapahtumaketju, olettaen, että kyseinen käyttäjä on jo olemassa tietokannassa ja kyseinen käyttäjä on pääkäyttäjä (admin). Kuvassa "User" ei tarkoita User-oliota, vaan se viittaa graafista liittymää käyttävään käyttäjään, jolle näytetään näkymiä.
 
-![Kirjautumissekvenssi](./kuvat/login_admin_sequence.png)
+![Kirjautumissekvenssi](./kuvat/login_sequence.png)
 
 Kun käyttäjä klikkaa "Login"-nappia, kutsutaan load_and_set_user-metodia, joka hakee käyttäjän tiedot UserRepository-luokan load_user-metodia käyttäen. Tässä tapauksessa käyttäjän tiedot löytyvät, joten load_and_set_user-metodi asettaa kyseisen käyttäjän tämänhetkiseksi käyttäjäksi. Tämän jälkeen UI-luokka käyttää current_user_is_admin-metodia hakeakseen tiedot siitä, onko käyttäjä pääkäyttäjä. Tässä tapauksessa näin on, joten UI-luokka näyttää pääkäyttäjännäkymän käyttäen _show_view_admin-metodia.
 
