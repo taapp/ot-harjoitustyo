@@ -5,7 +5,6 @@ from services.question_service import question_service
 class LoginView:
     def __init__(self, root, button_handler_create, button_handler_login):
         self._root = root
-        #self._question_text = question_text
         self._frame = None
         self._entry_username = None
         self._entry_password = None
@@ -27,7 +26,6 @@ class LoginView:
             master=self._frame, text="Welcome. Create a new user or login.")
         label_username = ttk.Label(master=self._frame, text="Username: ")
         label_password = ttk.Label(master=self._frame, text="Password: ")
-        #radio_button = ttk.Radiobutton(master=self._frame, text = 'Admin')
 
         self._entry_username = ttk.Entry(master=self._frame)
         self._entry_password = ttk.Entry(master=self._frame)
@@ -52,8 +50,6 @@ class LoginView:
             command=self._handle_button_click_login
         )
 
-        #label.grid(row=0, column=0)
-        #button.grid(row=1, column=0)
         label_welcome.grid()
         label_username.grid(row=1, column=0)
         self._entry_username.grid(row=1, column=1)
@@ -68,7 +64,6 @@ class LoginView:
         entry_username = self._entry_username.get()
         entry_password = self._entry_password.get()
         is_admin = self._check_admin.get()
-        #print(entry_username, entry_password, is_admin)
         if len(entry_username) == 0 or len(entry_password) == 0:
             self._error_text_var.set(
                 "Error: Empty usernames or passwords are not permitted.")

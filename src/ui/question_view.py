@@ -31,8 +31,6 @@ class QuestionView:
         self._error_text_var.set("")
         label_error = ttk.Label(
             master=self._frame, textvariable=self._error_text_var)
-        #label.grid(row=0, column=0)
-        #button.grid(row=1, column=0)
         label.grid()
         self._entry.grid()
         label_error.grid()
