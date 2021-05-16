@@ -24,6 +24,8 @@ Sovelluksen on suunniteltu toimivan Python-versiolla 3.6 ja sitä korkeammilla v
 
 [Viikon 6 release](https://github.com/taapp/ot-harjoitustyo/releases/tag/viikko6)
 
+[Viikon 7 release](https://github.com/taapp/ot-harjoitustyo/releases/tag/viikko7)
+
 ## Asennus
 
 1. Aja seuraava komento riippuvuuksien asentamiseksi
