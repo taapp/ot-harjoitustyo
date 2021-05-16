@@ -1,5 +1,6 @@
 from tkinter import ttk, constants
 
+
 class ReportView:
     def __init__(self, root, score_total, logout_button_handler):
         self._root = root
